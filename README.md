@@ -6,12 +6,12 @@ Aplicación para establecer criterios sobre la ngZone de Angular.
 
 ## NgZone
 
-Angular tiene su propio contenxto de ejecución (ngZone) y puede detectar cuando cualquier tarea asíncrona empieza o termina dentro de esa zona. Por lo que cualquier tarea que se ejecuta dentro de la ngZone desencadenará un cambio. 
-Es decir, para que cualquier cambio desencadene la 'detección de cambios', necesita ser ejecutado dentro de la ngZone.
+Angular tiene su propio contexto de ejecución (ngZone) y puede detectar cuando cualquier tarea asíncrona empieza o termina dentro de esa zona. Por lo que cualquier tarea que se ejecuta dentro de la ngZone desencadenará un cambio. 
+Es decir, para que cualquier cambio desencadene la 'detección de cambios', necesita ser ejecutado dentro de la ngZone. Existen unos triggers que están pendientes para detectar estos cambios.
 
-La primera vez que ejecutamos nuestra aplicación, el se crear el root component, se hace el bootstrap, se crean resto de componentes,todas nuestras funciones constructoras en los componentes se ejecutarán,..... Se establece el estado inicial de la aplicación
+La primera vez que ejecutamos nuestra aplicación se crea el root component, se hace el bootstrap, se crean resto de componentes,las funciones constructoras en los componentes se ejecutarán,... y cuando todo termina de inicializarse, se establece el estado inicial de la aplicación
 
-Una vez que se determina que el estado inicial de la aplicación, hay algunas maneras que el estado puede cambiar a través de tareas asíncronas, que pueden ser:
+Una vez se determina el estado inicial de la aplicación, hay algunas maneras de que el estado puede cambiar a través de tareas asíncronas, que pueden ser:
 
 eventos: (click),...
 Peticiones HTTP: http.post,...
@@ -28,22 +28,16 @@ Y se apoya en los métodos ngZone.runOutsideAngular() y ngZone.run()
 Se implementan 2 componentes para establecer estos conceptos:
 
 ## Demo
-Desplegada [aquí](https://angulartraining-ngzone.firebaseapp.com) 
-
-<p align="center"> 
-   <span><img src="screenshots/demo.gif" width="430px"/></span> 
-</p> 
-
+Se puede ver la demo funcionando [aquí](https://angulartraining-ngzone.firebaseapp.com) 
 
 ## Ejemplo1 - Loader
 Se trata de un simple loader que muestra por pantalla el progreso. 
-Se implementa una función que simular el proceso, incrementando el campo progress de 0 a 100
 
 <p align="center"> 
    <span><img src="screenshots/loader.gif"/></span> 
 </p> 
 
-
+Se implementa una función que simular el proceso, incrementando el campo progress de 0 a 100
 ```bash
   /**
     * Incrementa this.progress hasta 100 a través de un timeout que la ejecuta recursivamente cada 10 ms
@@ -75,13 +69,13 @@ Se implementa una función que simular el proceso, incrementando el campo progre
         this._increaseProgress(() => console.log('Dentro hecho!'));
     }
 ```
-### Fuera de la ngZone (progreso NO se renderiza en la vista, se muestra prograso una vez finalizado loop)
+### Fuera de la ngZone (progreso NO se renderiza en la vista, se muestra progreso una vez finalizado loop)
 ```bash
    /**
      * Se realiza el proceso fuera de la ngZone, con lo que en cada bucle se va actualizando
-     * el campo this.progress pero no se va actualizando en la vista al estar fuera.
+     * el campo this.progress pero no se va actualizando en la vista al estar fuera del ctx de angular.
      * Una vez concluido el proceso se vuelve a sincronizar con la ngZone para bindear this.progress
-     * con lo cuál evitamos todos los triggers que están pendientes en la detección de cambios en el dom que Angular2 ejecuta continuamente.
+     * con lo cual evitamos todos los triggers que están pendientes en la detección de cambios en el dom que Angular2 ejecuta continuamente.
      * @memberOf LoaderComponent
      */
     processOutsideOfAngularZone() {
@@ -190,7 +184,12 @@ Aún faltaría importar el css de bootstrap, lo importamos desde el mismo cdn de
 ```
 Se podría descargar o bajar el paquete de bootstrap con npm y añadirlo en styles[] dentro del package.json para que wp lo empaquete
 
+
+## Documentación
+Ver Documentacion de la aplicación [aqui](https://angulartraining-ngzone.firebaseapp.com/documentation/) 
+
 ### Generar documentación
+
 Instalación global
 ```bash
 npm install -g @compodoc/compodoc
@@ -202,6 +201,7 @@ npm install --save-dev @compodoc/compodoc
 Definir script en package.json (se añade -a screenshots para llevar la carpeta de screenshots al generado, y el theme)
 ```bash
 "scripts": {
+    ...
   "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json -a screenshots"
 }
 ```
@@ -214,5 +214,9 @@ Se genera carpeta /documentation
 ## Deploy firebase
 Se crea script en el package.json que borra /dist, genera el build para prod, documentación y despliega en firebase  
 ```bash
- "deploy-firebase": "del dist && ng build --env=prod --aot && npm run compodoc && move documentation dist && firebase deploy"
+"scripts": {
+    ...
+  "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json -a screenshots",
+  "deploy-firebase": "del dist && ng build --env=prod --aot && npm run compodoc && move documentation dist && firebase deploy"
+}
 ```
