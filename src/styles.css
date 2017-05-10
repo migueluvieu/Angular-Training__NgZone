@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
+body {
+    margin: 10;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.root-component {
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid #94250C;
+    text-align: center;
+}
+
+.title {
+    margin-left: 3rem;
+    color: white
+}
+
+.avatar {
+    color: brown;
+    text-decoration: underline
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.big {
+    font-size: 3rem;
+    margin-right: 3rem;
+}
+
+.principal {
+    display: flex;
+    flex-flow: column
+}
+
+.counter {
+    display: flex;
+    flex-flow: column
+}
+
+.counter li {
+    list-style: none;
+}
+
+.counter>.opciones {
+    margin: 1rem
+}
+
+.counter>.contenido {
+    margin: 1rem
+}
+
+.loader>.opciones {
+    margin: 1rem
+}
+
+.loader>.contenido {
+    margin: 1rem
+}

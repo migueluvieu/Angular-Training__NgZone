@@ -1,0 +1,29 @@
+<section class='loader'>
+    <p>Progreso: {{progress}}%</p>
+    <div *ngIf="progress!=0">
+        <div *ngIf="progress >= 100; then procesado else procesando">Procesado {{zona}} de ngZone</div>
+
+        <ng-template #procesado>
+            <p class='green'>Procesado {{zona}} de ngZone</p>
+        </ng-template>
+
+        <ng-template #procesando>
+            <p class='red'>Procesando ...<span *ngIf="zona=='dentro'; then dentro else fuera"></span> </p>
+            <ng-template #dentro>
+                <span> !!!!Se actualiza vista!!!!</span>
+            </ng-template>
+
+            <ng-template #fuera>
+                !!!!No se actualiza vista!!!!
+            </ng-template>
+        </ng-template>
+    </div>
+    <div>
+        <md-progress-bar [color]="color" [mode]="mode" [value]="progress" [bufferValue]="bufferValue">
+        </md-progress-bar>
+    </div>
+    <div class="opciones">
+        <a md-raised-button (click)="processWithinAngularZone()"><i class="material-icons">open_in_browser</i>Procesar dentro ngZone</a>
+        <a md-raised-button (click)="processOutsideOfAngularZone()"><i class="material-icons">open_in_new</i>Procesar fuera ngZone</a>
+    </div>
+</section>

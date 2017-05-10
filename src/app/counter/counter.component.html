@@ -1,0 +1,13 @@
+<section class="counter">
+    <div class="contenido">
+        <span class="big red">{{contador}}</span>
+        <span class='green'> Estamos {{zone}} de ngZone</span>
+        <span class='red' *ngIf="zone == 'fuera'">, el contador se sigue incrementando pero no se renderiza</span>
+    </div>
+    <div class="opciones">
+        <a md-raised-button (click)="init()"><i class="material-icons">play_circle_outline</i>Init!</a>
+        <a md-raised-button (click)="stop()"><i class="material-icons">stop</i>Reset!</a>
+        <a md-raised-button (click)="exitNgZone()"><i class="material-icons">open_in_new</i>Salir de ngZone</a>
+        <a md-raised-button (click)="enterNgZone()"><i class="material-icons">open_in_browser</i>Entrar de ngZone</a>
+    </div>
+</section>
