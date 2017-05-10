@@ -13,10 +13,12 @@ La primera vez que ejecutamos nuestra aplicación se crea el root component, se 
 
 Una vez se determina el estado inicial de la aplicación, hay algunas maneras de que el estado puede cambiar a través de tareas asíncronas, que pueden ser:
 
-eventos: (click),...
-Peticiones HTTP: http.post,...
-Temporizadores: setTimeout,...
-...
+<ul>
+    <li>Eventos como (click), (mouseover)...</li>
+    <li>Peticiones HTTP: http.post, http.get ...</li>
+    <li>Temporizadores: setTimeout, setInterval...</li>
+    <li>...</li>
+</ul>
 
 Todos ellos pueden causar un cambio en la vista.  
 La ngZone se importa del core de angular
