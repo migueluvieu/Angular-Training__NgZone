@@ -149,44 +149,6 @@ Se puede entrar de nuevo en el ctx angular de la siguiente forma
 ``` 
 de nuevo el contador volverá a renderizarse en la vista
 
-## Ng-bootstrap
-Se utiliza Ng-bootstrap para la vista. [Documentación](https://ng-bootstrap.github.io/#/home)
-
-### Instalación
-```bash
-npm install --save @ng-bootstrap/ng-bootstrap
-```
-importar en el módulo principal
-```bash
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-@NgModule({
-  declarations: [AppComponent, ...],
-  imports: [NgbModule.forRoot(), ...],  
-  bootstrap: [AppComponent]
-})
-export class AppModule {
-}
-```
-Para utilizarlo en el resto de módulos secundarios, no es necesario forRoot
-```bash
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-@NgModule({
-  declarations: [OtherComponent, ...],
-  imports: [NgbModule, ...]
-})
-export class OtherModule {
-}
-```
-Este módulo contiene los js para bootstrap (jquery, tether...)
-Aún faltaría importar el css de bootstrap, lo importamos desde el mismo cdn dentro del styles.css
-```bash
-@import '~https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'; 
-```
-Se podría descargar o bajar el paquete de bootstrap con npm y añadirlo en styles[] dentro del package.json para que wp lo empaquete
-
-
 ## Documentación
 Ver Documentacion de la aplicación [aqui](https://angulartraining-ngzone.firebaseapp.com/documentation/) 
 
